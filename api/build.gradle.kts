@@ -2,6 +2,7 @@ plugins {
     id("java-library-convention")
 }
 
+
 dependencies {
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)

@@ -5,6 +5,12 @@ import org.jetbrains.annotations.Contract;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * 2D vector.
+ *
+ * @param x x component
+ * @param y y component
+ */
 @With
 public record Vector2(double x, double y) implements Cloneable {
 
@@ -51,7 +57,7 @@ public record Vector2(double x, double y) implements Cloneable {
      * @param y y
      * @return vector
      */
-    public static Vector2 of(double x, double y) {
+    public static Vector2 of(final double x, final double y) {
         return new Vector2(x, y);
     }
 
@@ -175,7 +181,7 @@ public record Vector2(double x, double y) implements Cloneable {
      * @return the dot product
      */
     public double dot(final Vector2 other) {
-        return x * other.x * y * other.y;
+        return x * other.x + y * other.y;
     }
 
     /**

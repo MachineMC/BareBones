@@ -6,6 +6,10 @@ import org.machinemc.barebones.math.Vector3;
 
 /**
  * Represents position of a block in the world.
+ *
+ * @param x x-coordinate
+ * @param y y-coordinate
+ * @param z z-coordinate
  */
 @With
 public record BlockPosition(int x, int y, int z) implements Cloneable {

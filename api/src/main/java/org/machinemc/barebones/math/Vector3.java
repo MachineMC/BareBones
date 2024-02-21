@@ -5,6 +5,13 @@ import org.jetbrains.annotations.Contract;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * 3D vector.
+ *
+ * @param x x component
+ * @param y y component
+ * @param z z component
+ */
 @With
 public record Vector3(double x, double y, double z) implements Cloneable {
 
@@ -54,7 +61,7 @@ public record Vector3(double x, double y, double z) implements Cloneable {
      * @param z z
      * @return vector
      */
-    public static Vector3 of(double x, double y, double z) {
+    public static Vector3 of(final double x, final double y, final double z) {
         return new Vector3(x, y, z);
     }
 
@@ -190,7 +197,7 @@ public record Vector3(double x, double y, double z) implements Cloneable {
      * @return the dot product
      */
     public double dot(final Vector3 other) {
-        return x * other.x * y * other.y * z * other.z;
+        return x * other.x + y * other.y + z * other.z;
     }
 
     /**
@@ -225,9 +232,9 @@ public record Vector3(double x, double y, double z) implements Cloneable {
      */
     @Contract(pure = true)
     public Vector3 midpoint(final Vector3 other) {
-        double x = (this.x + other.x) / 2;
-        double y = (this.y + other.y) / 2;
-        double z = (this.z + other.z) / 2;
+        final double x = (this.x + other.x) / 2;
+        final double y = (this.y + other.y) / 2;
+        final double z = (this.z + other.z) / 2;
         return new Vector3(x, y, z);
     }
 

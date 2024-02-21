@@ -13,6 +13,9 @@ import java.util.Optional;
  * Valid characters for namespaces are [a-z0-9.-_].
  * <p>
  * Valid characters for keys are [a-z0-9.-_/].
+ *
+ * @param namespace namespace
+ * @param key key
  */
 @With
 public record NamespacedKey(String namespace, String key) {
