@@ -35,6 +35,7 @@ dependencies {
     testAnnotationProcessor(libs.lombok)
 
     implementation(libs.asm)
+    implementation(libs.google.guava)
     implementation(libs.google.gson)
     implementation(libs.netty)
 
