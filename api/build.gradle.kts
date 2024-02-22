@@ -10,5 +10,6 @@ dependencies {
     testAnnotationProcessor(libs.lombok)
 
     implementation(libs.google.guava)
+    implementation(libs.google.gson)
     implementation(libs.fastutil)
 }
