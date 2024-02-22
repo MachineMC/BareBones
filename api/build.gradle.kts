@@ -2,6 +2,12 @@ plugins {
     id("java-library-convention")
 }
 
+repositories {
+    maven {
+        url = uri("http://www.machinemc.org/releases")
+        isAllowInsecureProtocol = true
+    }
+}
 
 dependencies {
     compileOnly(libs.lombok)
@@ -11,5 +17,6 @@ dependencies {
 
     implementation(libs.google.guava)
     implementation(libs.google.gson)
+    implementation(libs.netty)
     implementation(libs.fastutil)
 }
