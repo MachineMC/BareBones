@@ -2,13 +2,6 @@ plugins {
     id("java-library-convention")
 }
 
-repositories {
-    maven {
-        url = uri("http://www.machinemc.org/releases")
-        isAllowInsecureProtocol = true
-    }
-}
-
 dependencies {
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)

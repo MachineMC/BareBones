@@ -46,7 +46,7 @@ dependencyResolutionManagement {
             library("paklet-core", "org.machinemc:paklet-core:$paklet")
             library("paklet-processor", "org.machinemc:paklet-processor:$paklet")
 
-            plugin("paklet-plugin", "paklet-plugin").version("1.0.0")
+            plugin("paklet-plugin", "paklet-plugin").version(paklet)
         }
 
 

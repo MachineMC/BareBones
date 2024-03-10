@@ -1,28 +1,26 @@
 import org.machinemc.paklet.plugin.PakletPlugin
 
-plugins {
-    id("java-library-convention")
-}
-
 buildscript {
     repositories {
         maven {
-            url = uri("http://www.machinemc.org/releases")
-            isAllowInsecureProtocol = true
+            url = uri("https://repo.machinemc.org/releases")
         }
     }
     dependencies {
-        val paklet = libs.plugins.paklet.plugin.get();
+        val paklet = libs.plugins.paklet.plugin.get()
         classpath("org.machinemc:${paklet.pluginId}:${paklet.version}")
     }
+}
+
+plugins {
+    id("java-library-convention")
 }
 
 apply<PakletPlugin>()
 
 repositories {
     maven {
-        url = uri("http://www.machinemc.org/releases")
-        isAllowInsecureProtocol = true
+        url = uri("https://repo.machinemc.org/releases")
     }
 }
 
