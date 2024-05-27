@@ -1,7 +1,7 @@
 rootProject.name = "BareBones"
 
-include("api")
-include("internal")
+include("key")
+include("profile")
 
 pluginManagement {
     includeBuild("build-logic")
