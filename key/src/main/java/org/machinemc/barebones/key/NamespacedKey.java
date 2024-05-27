@@ -40,7 +40,10 @@ public record NamespacedKey(String namespace, String key) implements Comparable<
     public NamespacedKey {
         Preconditions.checkNotNull(namespace, "Namespace can not be null");
         Preconditions.checkNotNull(key, "Key can not be null");
-        Preconditions.checkArgument(isValidNamespacedKey(namespace, key), "The key '" + namespace + DEFAULT_SEPARATOR + key + "' doesn't match the identifier format.");
+        Preconditions.checkArgument(
+                isValidNamespacedKey(namespace, key),
+                "The key '" + namespace + DEFAULT_SEPARATOR + key + "' doesn't match the identifier format."
+        );
     }
 
     /**
@@ -65,7 +68,9 @@ public record NamespacedKey(String namespace, String key) implements Comparable<
     public static NamespacedKey parse(final String namespacedKey) {
         return parseNamespacedKey(namespacedKey)
                 .map(key -> NamespacedKey.of(key[0], key[1]))
-                .orElseThrow(() -> new IllegalArgumentException("The namespaced key '" + namespacedKey + "' does not have a separator character '" + DEFAULT_SEPARATOR + "'"));
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "The namespaced key '" + namespacedKey + "' does not have a separator character '" + DEFAULT_SEPARATOR + "'"
+                ));
     }
 
     /**
@@ -108,7 +113,7 @@ public record NamespacedKey(String namespace, String key) implements Comparable<
             .thenComparing(NamespacedKey::namespace);
 
     @Override
-    public int compareTo(@NotNull NamespacedKey other) {
+    public int compareTo(final @NotNull NamespacedKey other) {
         return COMPARATOR.compare(this, other);
     }
 

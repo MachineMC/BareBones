@@ -8,11 +8,8 @@ dependencies {
     annotationProcessor(libs.lombok)
     testCompileOnly(libs.lombok)
     testAnnotationProcessor(libs.lombok)
-
     implementation(libs.google.guava)
     implementation(libs.google.gson)
-    implementation(libs.netty)
-    implementation(libs.fastutil)
 }
 
 publishing {

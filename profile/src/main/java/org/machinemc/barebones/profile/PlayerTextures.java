@@ -44,8 +44,8 @@ public record PlayerTextures(String value,
      * @throws MalformedURLException if the provided skin URL is malformed
      * @throws JsonSyntaxException if the value of the property is not a valid JSON format
      */
-    public static Optional<PlayerTextures> create(GameProfile gameProfile) throws MalformedURLException, JsonSyntaxException {
-        GameProfile.Property property = gameProfile.properties().stream()
+    public static Optional<PlayerTextures> create(final GameProfile gameProfile) throws MalformedURLException, JsonSyntaxException {
+        final GameProfile.Property property = gameProfile.properties().stream()
                 .filter(p -> p.name().equals(TEXTURES))
                 .findFirst()
                 .orElse(null);
@@ -62,7 +62,7 @@ public record PlayerTextures(String value,
      * @throws JsonSyntaxException if the value of the property is not a valid JSON format
      * @throws IllegalStateException if the provided property is not player textures property
      */
-    public static PlayerTextures create(GameProfile.Property property) throws MalformedURLException, JsonSyntaxException {
+    public static PlayerTextures create(final GameProfile.Property property) throws MalformedURLException, JsonSyntaxException {
         if (!property.name().equals(TEXTURES))
             throw new IllegalStateException("Provided property is not player textures property");
         return create(property.value(), property.signature());
@@ -78,16 +78,16 @@ public record PlayerTextures(String value,
      * @throws JsonSyntaxException if the value of the property is not a valid JSON format
      * @throws IllegalStateException if the provided property is not player textures property
      */
-    public static PlayerTextures create(String value, @Nullable String signature) throws MalformedURLException, JsonSyntaxException {
-        JsonElement decoded = JsonParser.parseString(new String(Base64.getDecoder().decode(value)));
+    public static PlayerTextures create(final String value, final @Nullable String signature) throws MalformedURLException, JsonSyntaxException {
+        final JsonElement decoded = JsonParser.parseString(new String(Base64.getDecoder().decode(value)));
         if (!decoded.isJsonObject())
             throw new JsonSyntaxException("Texture value of the skin contains malformed JSON format");
 
-        JsonObject textures = decoded.getAsJsonObject().getAsJsonObject(TEXTURES);
-        JsonObject skinJson = textures.getAsJsonObject("SKIN");
+        final JsonObject textures = decoded.getAsJsonObject().getAsJsonObject(TEXTURES);
+        final JsonObject skinJson = textures.getAsJsonObject("SKIN");
 
-        URL skinURL = URI.create(skinJson.get("url").getAsString()).toURL();
-        URL capeURL = textures.has("CAPE")
+        final URL skinURL = URI.create(skinJson.get("url").getAsString()).toURL();
+        final URL capeURL = textures.has("CAPE")
                 ? URI.create(textures.getAsJsonObject("CAPE").get("url").getAsString()).toURL()
                 : null;
 
@@ -112,7 +112,7 @@ public record PlayerTextures(String value,
      * @return unsigned player textures with given skin
      * @throws MalformedURLException if the provided skin URL is malformed
      */
-    public static PlayerTextures create(URL skinURL) throws MalformedURLException {
+    public static PlayerTextures create(final URL skinURL) throws MalformedURLException {
         return create(createProperty(skinURL));
     }
 
@@ -127,17 +127,17 @@ public record PlayerTextures(String value,
 
     private static final Gson GSON = new Gson();
 
-    private static GameProfile.Property createProperty(URL skinURL) {
+    private static GameProfile.Property createProperty(final URL skinURL) {
         Preconditions.checkNotNull(skinURL, "Skin URL can not be null");
-        JsonObject value = new JsonObject();
+        final JsonObject value = new JsonObject();
         value.addProperty("signatureRequired", false);
-        JsonObject textures = new JsonObject();
-        JsonObject skin = new JsonObject();
+        final JsonObject textures = new JsonObject();
+        final JsonObject skin = new JsonObject();
         skin.addProperty("url", skinURL.toString());
         textures.add("SKIN", skin);
         value.add(TEXTURES, textures);
-        String valueJSON = GSON.toJson(value);
-        String valueString = BaseEncoding.base64().encode(valueJSON.getBytes(StandardCharsets.UTF_8));
+        final String valueJSON = GSON.toJson(value);
+        final String valueString = BaseEncoding.base64().encode(valueJSON.getBytes(StandardCharsets.UTF_8));
         return new GameProfile.Property(TEXTURES, valueString, null);
     }
 

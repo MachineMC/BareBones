@@ -31,7 +31,7 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      * @param textures textures of the game profile
      * @return game profile
      */
-    public static GameProfile withTextures(UUID uuid, String name, PlayerTextures textures) {
+    public static GameProfile withTextures(final UUID uuid, final String name, final PlayerTextures textures) {
         return new GameProfile(uuid, name, List.of(textures.asProperty()));
     }
 
@@ -56,7 +56,7 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      * @param uuid the UUID for the profile
      * @param name the profile's username
      */
-    public GameProfile(UUID uuid, String name) {
+    public GameProfile(final UUID uuid, final String name) {
         this(uuid, name, Collections.emptyList());
     }
 
@@ -67,8 +67,8 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      * @return new GameProfile
      */
     @Contract(pure = true)
-    public GameProfile addProperties(Iterable<Property> properties) {
-        List<Property> newProperties = ImmutableList.<Property>builder()
+    public GameProfile addProperties(final Iterable<Property> properties) {
+        final List<Property> newProperties = ImmutableList.<Property>builder()
                 .addAll(this.properties)
                 .addAll(properties)
                 .build();
@@ -82,7 +82,7 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      * @return new GameProfile
      */
     @Contract(pure = true)
-    public GameProfile addProperty(Property property) {
+    public GameProfile addProperty(final Property property) {
         return addProperties(Collections.singleton(property));
     }
 
@@ -92,7 +92,7 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      * @param name name of the property
      * @return property
      */
-    public Optional<Property> getProperty(String name) {
+    public Optional<Property> getProperty(final String name) {
         return properties.stream().filter(property -> property.name.equals(name)).findFirst();
     }
 
@@ -103,7 +103,7 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      * @return copy of this game profile
      */
     @Contract(pure = true)
-    public GameProfile removeProperty(String name) {
+    public GameProfile removeProperty(final String name) {
         return withProperties(properties.stream().filter(property -> !property.name.equals(name)).toList());
     }
 
@@ -113,9 +113,9 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      * @param username player's nickname
      * @return GameProfile suitable for offline mode player
      */
-    public static GameProfile forOfflinePlayer(String username) {
+    public static GameProfile forOfflinePlayer(final String username) {
         Preconditions.checkNotNull(username, "Username can not be null");
-        UUID uuid = UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes(StandardCharsets.UTF_8));
+        final UUID uuid = UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes(StandardCharsets.UTF_8));
         return new GameProfile(uuid, username, Collections.emptyList());
     }
 
@@ -128,7 +128,7 @@ public record GameProfile(UUID uuid, String name, @Unmodifiable List<Property> p
      */
     public record Property(String name, String value, @Nullable String signature) {
 
-        public Property(String name, String value) {
+        public Property(final String name, final String value) {
             this(name, value, null);
         }
 
